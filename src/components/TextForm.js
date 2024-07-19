@@ -33,6 +33,13 @@ export default function TextForm(props) {
     props.showAlert("Converted to Capitalize", "success");
   }
 
+  const handleRemoveSpantagsClick = () =>{
+    const spanTagRegex = /<\/?span[^>]*>/g;
+    let newText = text.replace(spanTagRegex, '').trim();
+    setText(newText);
+    props.showAlert("Span tags has been removed", "success");
+  }
+
   const handleCopyClipboardClick = () =>{
     try{
         navigator.clipboard.writeText(text);
@@ -57,6 +64,7 @@ export default function TextForm(props) {
             <button className="btn btn-primary mx-2" onClick={() => text && handleLowerCaseClick()}>Convert to Lowercase</button>
             <button className="btn btn-primary mx-2" onClick={() => text && handleExtraWhiteSpaceClick()}>Remove extra white space</button>
             <button className="btn btn-primary mx-2" onClick={() => text && handleCapitalizeClick()}>Convert to Capitalize</button>
+            <button className="btn btn-primary mx-2" onClick={() => text && handleRemoveSpantagsClick()}>Remove Span Tags</button>
             <button className="btn btn-primary mx-2" onClick={() => text && handleCopyClipboardClick()}>Copy to Clipboard</button>
             <button className="btn btn-primary mx-2" onClick={() => text && handleClearClick()}>Clear</button>
         </div>
